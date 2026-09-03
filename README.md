@@ -1,6 +1,6 @@
 # Smart Network Monitoring and Device Management Dashboard
 
-## P2 enterprise NOC operations
+## P2 enterprise NOC operation
 
 The operational layer adds a server-derived NOC health summary, worst-first site health, incident management, maintenance windows, explicit topology links, a dark wallboard, and site-scoped access. The deterministic health score starts at 100 and subtracts `(15 × down devices + 6 × degraded devices + 8 × critical alerts + 4 × high alerts + 3 × open incidents) / max(device count, 1)`, bounded to 0–100. Its contributors are exposed beside the score; it is not an ML prediction.
 
