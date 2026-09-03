@@ -1,13 +1,12 @@
 import pytest
 from channels.testing import WebsocketCommunicator
+from django.contrib.auth import get_user_model
 from django.core.management import call_command
 
 from apps.alerts.models import Alert
 from apps.devices.models import Device
 from apps.traffic.models import TrafficSample
 from config.asgi import application as asgi_app
-from django.contrib.auth import get_user_model
-
 
 User = get_user_model()
 

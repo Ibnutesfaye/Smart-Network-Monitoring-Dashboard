@@ -1,6 +1,11 @@
 from rest_framework.routers import DefaultRouter
 
-from .views import DeviceInterfaceViewSet, NetworkSegmentViewSet, OrganizationViewSet, SiteViewSet
+from .views import (
+    DeviceInterfaceViewSet,
+    NetworkSegmentViewSet,
+    OrganizationViewSet,
+    SiteViewSet,
+)
 
 router = DefaultRouter()
 router.register("organizations", OrganizationViewSet, basename="organizations")

@@ -4,7 +4,13 @@ from django.conf import settings
 from django.db import transaction
 
 from apps.alerts.engine import evaluate_device_alerts, evaluate_interface_alerts
-from apps.devices.models import Device, DeviceInterface, DeviceStatusHistory, DeviceTelemetry, InterfaceTelemetry
+from apps.devices.models import (
+    Device,
+    DeviceInterface,
+    DeviceStatusHistory,
+    DeviceTelemetry,
+    InterfaceTelemetry,
+)
 from apps.monitoring.authorization import require_authorized_device
 
 from .broadcast import broadcast_device

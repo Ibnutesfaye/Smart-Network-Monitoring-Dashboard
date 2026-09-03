@@ -5,7 +5,12 @@ from django.utils import timezone
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from apps.devices.models import Device, DeviceInterface, DeviceTelemetry, InterfaceTelemetry
+from apps.devices.models import (
+    Device,
+    DeviceInterface,
+    DeviceTelemetry,
+    InterfaceTelemetry,
+)
 
 RANGES = {"1h": timedelta(hours=1), "6h": timedelta(hours=6), "24h": timedelta(hours=24), "7d": timedelta(days=7), "30d": timedelta(days=30)}
 MAX_POINTS = 1000

@@ -2,7 +2,14 @@ import ipaddress
 
 from rest_framework import serializers
 
-from .models import Device, DeviceInterface, DeviceStatusHistory, NetworkSegment, Organization, Site
+from .models import (
+    Device,
+    DeviceInterface,
+    DeviceStatusHistory,
+    NetworkSegment,
+    Organization,
+    Site,
+)
 
 
 class OrganizationSerializer(serializers.ModelSerializer):

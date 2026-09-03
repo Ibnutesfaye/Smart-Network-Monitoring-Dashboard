@@ -1,6 +1,5 @@
 import random
 
-
 from .base import DeviceDTO, PingResult, TrafficDTO
 
 MOCK_DEVICES = [

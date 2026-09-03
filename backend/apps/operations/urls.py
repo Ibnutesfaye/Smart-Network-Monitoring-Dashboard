@@ -1,7 +1,14 @@
 from django.urls import path
 from rest_framework.routers import DefaultRouter
 
-from .views import IncidentViewSet, MaintenanceWindowViewSet, NocAvailabilityView, NocProblemsView, NocSummaryView, NocTrafficView
+from .views import (
+    IncidentViewSet,
+    MaintenanceWindowViewSet,
+    NocAvailabilityView,
+    NocProblemsView,
+    NocSummaryView,
+    NocTrafficView,
+)
 
 router = DefaultRouter()
 router.register("incidents", IncidentViewSet, basename="incident")

@@ -6,7 +6,11 @@ from apps.devices.models import Device
 from apps.devices.serializers import DeviceSerializer
 from apps.monitoring.collectors.snmp import SNMPCollector
 from apps.monitoring.snmp_profiles.generic import GenericProfile
-from apps.monitoring.snmp_transport import PySNMPTransport, SNMPCredentials, SNMPErrorCode
+from apps.monitoring.snmp_transport import (
+    PySNMPTransport,
+    SNMPCredentials,
+    SNMPErrorCode,
+)
 
 
 class FakeTransport:

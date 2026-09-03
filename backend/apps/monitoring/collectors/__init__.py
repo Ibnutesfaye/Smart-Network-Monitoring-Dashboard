@@ -1,9 +1,9 @@
 from django.conf import settings
 
+from .base import MonitoringResult
 from .mock import MockCollector
 from .ping import PingCollector
 from .snmp import SNMPCollector
-from .base import MonitoringResult
 
 
 class RealCollector:
@@ -19,4 +19,4 @@ def get_collector():
     return MockCollector() if settings.MONITORING_MODE == "mock" else RealCollector()
 
 
-__all__ = ["get_collector", "MockCollector", "PingCollector"]
+__all__ = ["MockCollector", "PingCollector", "get_collector"]

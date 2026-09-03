@@ -23,7 +23,7 @@ def _require_production_configuration():
     secret = os.getenv("SECRET_KEY", "")  # noqa: F405
     if len(secret) < 50 or secret.startswith(("change-me", "django-insecure")):
         errors.append("SECRET_KEY must be a unique value of at least 50 characters")
-    if DEBUG:  # noqa: F405
+    if DEBUG:
         errors.append("DEBUG must be False")
     if not ALLOWED_HOSTS or any(host in {"*", "localhost", "127.0.0.1"} for host in ALLOWED_HOSTS):  # noqa: F405
         errors.append("ALLOWED_HOSTS must contain explicit production hostnames")

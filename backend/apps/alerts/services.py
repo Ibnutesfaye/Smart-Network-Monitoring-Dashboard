@@ -1,7 +1,6 @@
-from django.core.mail import send_mail
 from django.conf import settings
-from django.db import transaction
-from django.db import models
+from django.core.mail import send_mail
+from django.db import models, transaction
 
 from apps.monitoring.broadcast import broadcast_alert
 
@@ -24,6 +23,7 @@ def create_alert(device, alert_type, alert_level, message):
 
 def apply_maintenance_context(alert):
     from django.utils import timezone
+
     from apps.operations.models import MaintenanceWindow
 
     if not alert.device_id:

@@ -1,7 +1,6 @@
 import pytest
 
 
-
 @pytest.mark.django_db
 def test_device_crud(api_client, admin_user):
     api_client.force_authenticate(user=admin_user)

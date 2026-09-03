@@ -1,9 +1,9 @@
+from django.db import transaction
+from django.utils import timezone
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from django.db import transaction
-from django.utils import timezone
 
 from apps.accounts.permissions import IsAdministrator, IsAdministratorOrReadOnly
 from apps.audit.utils import log_activity

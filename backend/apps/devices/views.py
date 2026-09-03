@@ -8,7 +8,13 @@ from apps.monitoring.tasks import discover_devices
 from apps.operations.services import site_scope
 
 from .models import Device, DeviceInterface, NetworkSegment, Organization, Site
-from .serializers import DeviceInterfaceSerializer, DeviceSerializer, NetworkSegmentSerializer, OrganizationSerializer, SiteSerializer
+from .serializers import (
+    DeviceInterfaceSerializer,
+    DeviceSerializer,
+    NetworkSegmentSerializer,
+    OrganizationSerializer,
+    SiteSerializer,
+)
 
 
 class OrganizationViewSet(viewsets.ModelViewSet):

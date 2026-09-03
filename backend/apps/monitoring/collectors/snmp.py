@@ -2,7 +2,11 @@ from django.conf import settings
 
 from apps.monitoring.authorization import require_authorized_device
 from apps.monitoring.snmp_profiles import get_profile
-from apps.monitoring.snmp_transport import PySNMPTransport, SNMPCredentials, SNMPErrorCode
+from apps.monitoring.snmp_transport import (
+    PySNMPTransport,
+    SNMPCredentials,
+    SNMPErrorCode,
+)
 
 from .base import BaseCollector, MonitoringResult
 

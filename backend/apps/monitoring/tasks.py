@@ -6,7 +6,12 @@ from django.utils import timezone
 
 from apps.alerts.models import Alert, AlertRule
 from apps.alerts.services import create_alert
-from apps.devices.models import Device, DeviceTelemetry, InterfaceTelemetry, NetworkSegment
+from apps.devices.models import (
+    Device,
+    DeviceTelemetry,
+    InterfaceTelemetry,
+    NetworkSegment,
+)
 from apps.traffic.models import TrafficSample
 
 from .authorization import UnauthorizedTarget, parse_authorized_network

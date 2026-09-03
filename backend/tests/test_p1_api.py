@@ -2,8 +2,14 @@ import pytest
 from django.contrib.auth import get_user_model
 from rest_framework.test import APIClient
 
-from apps.devices.models import Device, DeviceTelemetry, NetworkSegment, Organization, Site
 from apps.alerts.models import Alert
+from apps.devices.models import (
+    Device,
+    DeviceTelemetry,
+    NetworkSegment,
+    Organization,
+    Site,
+)
 
 
 @pytest.fixture

@@ -1,13 +1,13 @@
+from django.db import transaction
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from apps.devices.models import Device
+from apps.monitoring.broadcast import broadcast_operational_event
 from apps.operations.permissions import IsAdministratorOrScopedReadOnly
 from apps.operations.services import site_scope
-from apps.monitoring.broadcast import broadcast_operational_event
-from django.db import transaction
 
 from .models import TopologyLink
 from .serializers import TopologyLinkSerializer

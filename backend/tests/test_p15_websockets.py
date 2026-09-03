@@ -1,14 +1,13 @@
 from datetime import timedelta
 
 import pytest
+from asgiref.sync import sync_to_async
 from channels.layers import get_channel_layer
 from channels.testing import WebsocketCommunicator
-from rest_framework_simplejwt.tokens import AccessToken
-from asgiref.sync import sync_to_async
 from django.contrib.auth import get_user_model
+from rest_framework_simplejwt.tokens import AccessToken
 
 from apps.devices.models import Organization, Site
-
 from config.asgi import application
 
 

@@ -10,7 +10,12 @@ from apps.alerts.models import Alert
 from apps.alerts.services import create_alert
 from apps.devices.models import Device, DeviceStatusHistory, Organization, Site
 from apps.operations.models import IncidentEvent, MaintenanceWindow
-from apps.operations.services import create_incident, evaluate_maintenance_windows, noc_summary, transition_incident
+from apps.operations.services import (
+    create_incident,
+    evaluate_maintenance_windows,
+    noc_summary,
+    transition_incident,
+)
 from apps.topology.models import TopologyLink
 
 pytestmark = pytest.mark.django_db

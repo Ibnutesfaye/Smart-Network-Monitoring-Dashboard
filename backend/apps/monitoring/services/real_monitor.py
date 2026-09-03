@@ -1,5 +1,5 @@
-import logging
 import ipaddress
+import logging
 import platform
 import socket
 import subprocess

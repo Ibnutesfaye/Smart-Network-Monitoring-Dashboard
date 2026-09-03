@@ -9,10 +9,15 @@ from apps.alerts.engine import fire_or_update
 from apps.alerts.models import Alert, AlertRule
 from apps.devices.models import Device, NetworkSegment, Organization, Site
 from apps.monitoring.authorization import is_authorized_target
+from apps.monitoring.collectors.base import MonitoringResult
 from apps.monitoring.collectors.mock import MockCollector
 from apps.monitoring.collectors.ping import PingCollector
-from apps.monitoring.processing import calculate_counter_rates, counter_delta, process_monitoring_result, utilization
-from apps.monitoring.collectors.base import MonitoringResult
+from apps.monitoring.processing import (
+    calculate_counter_rates,
+    counter_delta,
+    process_monitoring_result,
+    utilization,
+)
 
 
 @pytest.fixture

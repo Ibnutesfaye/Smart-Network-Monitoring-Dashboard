@@ -1,10 +1,10 @@
-from django.db import transaction
+from django.db import models, transaction
 from django.db.models import F
-from django.db import models
 from django.utils import timezone
 
-from .models import Alert, AlertRule
 from apps.monitoring.broadcast import broadcast_alert
+
+from .models import Alert, AlertRule
 
 
 def _dedup(alert_type, device_id, rule_id=None, interface_id=None):

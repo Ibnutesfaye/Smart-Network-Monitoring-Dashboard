@@ -1,6 +1,13 @@
 from django.contrib import admin
 
-from .models import Device, DeviceInterface, DeviceStatusHistory, NetworkSegment, Organization, Site
+from .models import (
+    Device,
+    DeviceInterface,
+    DeviceStatusHistory,
+    NetworkSegment,
+    Organization,
+    Site,
+)
 
 admin.site.register(Organization)
 admin.site.register(Site)

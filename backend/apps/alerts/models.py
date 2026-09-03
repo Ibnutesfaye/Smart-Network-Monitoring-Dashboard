@@ -1,8 +1,7 @@
+from django.conf import settings
 from django.db import models
 
-from apps.devices.models import Device
-from apps.devices.models import Site
-from django.conf import settings
+from apps.devices.models import Device, Site
 
 
 class Alert(models.Model):

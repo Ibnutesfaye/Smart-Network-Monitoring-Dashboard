@@ -10,12 +10,22 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from apps.alerts.models import Alert
-from apps.devices.models import Device, DeviceInterface, DeviceStatusHistory, InterfaceTelemetry
+from apps.devices.models import (
+    Device,
+    DeviceInterface,
+    DeviceStatusHistory,
+    InterfaceTelemetry,
+)
 from apps.monitoring.broadcast import broadcast_operational_event
 
 from .models import Incident, IncidentEvent, MaintenanceWindow
 from .permissions import IsOperator
-from .serializers import IncidentCommentSerializer, IncidentEventSerializer, IncidentSerializer, MaintenanceWindowSerializer
+from .serializers import (
+    IncidentCommentSerializer,
+    IncidentEventSerializer,
+    IncidentSerializer,
+    MaintenanceWindowSerializer,
+)
 from .services import create_incident, noc_summary, site_scope, transition_incident
 
 

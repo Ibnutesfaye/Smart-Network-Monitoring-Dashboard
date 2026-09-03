@@ -1,6 +1,11 @@
 from django.urls import path
 
-from .views import AlertTrendsView, DeviceGrowthView, SecurityStatsView, TrafficTrendsView
+from .views import (
+    AlertTrendsView,
+    DeviceGrowthView,
+    SecurityStatsView,
+    TrafficTrendsView,
+)
 
 urlpatterns = [
     path("device-growth/", DeviceGrowthView.as_view(), name="device-growth"),
