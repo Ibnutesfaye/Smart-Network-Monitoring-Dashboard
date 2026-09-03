@@ -49,8 +49,9 @@ class GenericProfile(BaseSNMPProfile):
         indexes = sorted({index for values in tables.values() for index in values})
         interfaces = []
         for index in indexes:
-            def value(key):
-                return tables.get(key, {}).get(index)
+            def value(key, idx=index):
+                return tables.get(key, {}).get(idx)
+
             high_speed = _integer(value("if_high_speed"))
             speed = high_speed * 1_000_000 if high_speed else _integer(value("if_speed"))
             interfaces.append(InterfaceResult(

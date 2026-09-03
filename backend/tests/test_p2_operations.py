@@ -67,7 +67,8 @@ def test_maintenance_date_validation_and_idempotent_activation(p2_data):
 
 
 def test_active_maintenance_records_and_suppresses_alert(p2_data):
-    user, site, device = p2_data
+    user, _site, device = p2_data
+
     now = timezone.now()
     window = MaintenanceWindow.objects.create(title="change", status="active", start_at=now - timedelta(minutes=1), end_at=now + timedelta(hours=1), created_by=user)
     window.devices.add(device)

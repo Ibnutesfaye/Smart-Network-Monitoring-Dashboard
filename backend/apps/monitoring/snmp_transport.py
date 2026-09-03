@@ -73,7 +73,8 @@ class PySNMPTransport:
             error, status, _, binds = await hlapi.get_cmd(hlapi.SnmpEngine(), self._auth(hlapi), transport, hlapi.ContextData(), *[hlapi.ObjectType(hlapi.ObjectIdentity(oid)) for oid in oids.values()])
             if error or status:
                 return {}, [str(self._classify(error or status))]
-            return {name: bind[1].prettyPrint() for name, bind in zip(oids, binds)}, []
+            return {name: bind[1].prettyPrint() for name, bind in zip(oids, binds, strict=False)}, []
+
         except Exception as exc:
             return {}, [str(self._classify(exc))]
 

@@ -2,6 +2,7 @@ from datetime import timedelta
 from unittest.mock import Mock, patch
 
 import pytest
+from django.core.exceptions import ValidationError
 from django.test import override_settings
 from django.utils import timezone
 
@@ -40,8 +41,9 @@ def test_cidr_validation_and_authorization(network):
 def test_default_route_is_rejected(network):
     _, segment = network
     segment.cidr = "0.0.0.0/0"
-    with pytest.raises(Exception):
+    with pytest.raises(ValidationError):
         segment.full_clean()
+
 
 
 @pytest.mark.django_db

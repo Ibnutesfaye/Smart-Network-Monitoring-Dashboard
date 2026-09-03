@@ -7,16 +7,17 @@ from rest_framework.views import APIView
 
 
 class LivenessView(APIView):
-    authentication_classes = []
-    permission_classes = [AllowAny]
+    authentication_classes = ()
+    permission_classes = (AllowAny,)
 
     def get(self, request):
         return Response({"status": "ok"})
 
 
 class ReadinessView(APIView):
-    authentication_classes = []
-    permission_classes = [AllowAny]
+    authentication_classes = ()
+    permission_classes = (AllowAny,)
+
 
     def get(self, request):
         checks = {"database": False, "redis": False}
