@@ -1,0 +1,90 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master, develop]
+  pull_request:
+    branches: [main, master, develop]
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: snmadmdcp
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: |
+          cd backend
+          pip install -r requirements.txt
+      - name: Lint
+        run: |
+          cd backend
+          ruff check .
+      - name: Check migrations
+        run: |
+          cd backend
+          python manage.py makemigrations --check --dry-run
+      - name: Test
+        env:
+          DB_HOST: localhost
+          DB_NAME: snmadmdcp
+          DB_USER: postgres
+          DB_PASSWORD: postgres
+          REDIS_URL: redis://localhost:6379/0
+          MONITORING_MODE: mock
+          SECRET_KEY: test-secret
+        run: |
+          cd backend
+          python manage.py migrate
+          pytest -q
+
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install and test
+        run: |
+          cd frontend
+          npm ci
+          npm run lint
+          npm run test
+          npm run build
+
+  docker:
+    runs-on: ubuntu-latest
+    needs: [backend, frontend]
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build backend image
+        run: docker build -t snmadmdcp-backend ./backend
+      - name: Validate production Compose
+        env:
+          DB_NAME: snmadmdcp
+          DB_USER: snmadmdcp
+          DB_PASSWORD: ci-compose-validation-only
+        run: docker compose -f docker-compose.prod.yml config --quiet

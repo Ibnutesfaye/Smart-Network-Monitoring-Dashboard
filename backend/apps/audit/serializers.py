@@ -1,0 +1,11 @@
+from rest_framework import serializers
+
+from .models import ActivityLog
+
+
+class ActivityLogSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(source="user.username", read_only=True, allow_null=True)
+
+    class Meta:
+        model = ActivityLog
+        fields = ("id", "user", "username", "action", "description", "ip_address", "created_at")
