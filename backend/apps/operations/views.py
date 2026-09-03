@@ -1,4 +1,5 @@
 from datetime import timedelta
+from typing import ClassVar
 
 from django.db import transaction
 from django.db.models import Count, Max, Q
@@ -30,7 +31,7 @@ from .services import create_incident, noc_summary, site_scope, transition_incid
 
 
 class NocSummaryView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes: ClassVar = [IsAuthenticated]
 
     def get(self, request):
         return Response(noc_summary(request.user))
@@ -40,7 +41,7 @@ RANGES = {"1h": 1 / 24, "6h": 0.25, "24h": 1, "7d": 7, "30d": 30}
 
 
 class NocAvailabilityView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes: ClassVar = [IsAuthenticated]
 
     def get(self, request):
         range_name = request.query_params.get("range", "24h")
@@ -62,7 +63,7 @@ class NocAvailabilityView(APIView):
 
 
 class NocTrafficView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes: ClassVar = [IsAuthenticated]
 
     def get(self, request):
         interfaces = site_scope(DeviceInterface.objects.select_related("device"), request.user, "device__site_id")
@@ -75,7 +76,7 @@ class NocTrafficView(APIView):
 
 
 class NocProblemsView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes: ClassVar = [IsAuthenticated]
 
     def get(self, request):
         devices = site_scope(Device.objects.all(), request.user).annotate(active_alerts=Count("alerts", filter=Q(alerts__state__in=[Alert.State.FIRING, Alert.State.ACKNOWLEDGED])))
@@ -87,10 +88,10 @@ class NocProblemsView(APIView):
 
 class IncidentViewSet(viewsets.ModelViewSet):
     serializer_class = IncidentSerializer
-    permission_classes = [IsOperator]
-    filterset_fields = ["status", "priority", "severity", "site", "assigned_to", "primary_device", "devices", "interfaces", "alerts"]
-    search_fields = ["incident_number", "title", "description"]
-    ordering_fields = ["created_at", "updated_at", "priority", "severity"]
+    permission_classes: ClassVar = [IsOperator]
+    filterset_fields: ClassVar = ["status", "priority", "severity", "site", "assigned_to", "primary_device", "devices", "interfaces", "alerts"]
+    search_fields: ClassVar = ["incident_number", "title", "description"]
+    ordering_fields: ClassVar = ["created_at", "updated_at", "priority", "severity"]
 
     def get_queryset(self):
         return site_scope(Incident.objects.select_related("site", "assigned_to", "created_by").prefetch_related("alerts", "devices", "interfaces"), self.request.user)
@@ -163,10 +164,10 @@ class IncidentViewSet(viewsets.ModelViewSet):
 
 class MaintenanceWindowViewSet(viewsets.ModelViewSet):
     serializer_class = MaintenanceWindowSerializer
-    permission_classes = [IsOperator]
-    filterset_fields = ["status", "sites", "devices", "interfaces"]
-    search_fields = ["title", "description"]
-    ordering_fields = ["start_at", "end_at", "created_at"]
+    permission_classes: ClassVar = [IsOperator]
+    filterset_fields: ClassVar = ["status", "sites", "devices", "interfaces"]
+    search_fields: ClassVar = ["title", "description"]
+    ordering_fields: ClassVar = ["start_at", "end_at", "created_at"]
 
     def get_queryset(self):
         return site_scope(MaintenanceWindow.objects.select_related("created_by", "approved_by").prefetch_related("sites", "devices", "interfaces"), self.request.user, "sites__id").distinct()

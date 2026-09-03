@@ -1,4 +1,5 @@
 from datetime import timedelta
+from typing import ClassVar
 
 from django.db.models import Avg, Max
 from django.utils import timezone
@@ -14,10 +15,10 @@ from .serializers import TrafficSampleSerializer, TrafficSummarySerializer
 class TrafficViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = TrafficSample.objects.select_related("device").all()
     serializer_class = TrafficSampleSerializer
-    permission_classes = [IsAuthenticated]
-    filterset_fields = ["device"]
-    ordering_fields = ["timestamp", "bandwidth_usage"]
-    ordering = ["-timestamp"]
+    permission_classes: ClassVar = [IsAuthenticated]
+    filterset_fields: ClassVar = ["device"]
+    ordering_fields: ClassVar = ["timestamp", "bandwidth_usage"]
+    ordering: ClassVar = ["-timestamp"]
 
     def get_queryset(self):
         qs = super().get_queryset()

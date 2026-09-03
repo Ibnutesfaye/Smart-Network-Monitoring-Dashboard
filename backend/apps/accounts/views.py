@@ -1,3 +1,5 @@
+from typing import ClassVar
+
 from django.contrib.auth import get_user_model
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import send_mail
@@ -30,7 +32,7 @@ User = get_user_model()
 
 @method_decorator(ratelimit(key="ip", rate="5/m", method="POST", block=True), name="dispatch")
 class LoginView(TokenObtainPairView):
-    permission_classes = [AllowAny]
+    permission_classes: ClassVar = [AllowAny]
 
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
@@ -56,11 +58,11 @@ class LogoutView(APIView):
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = RegisterSerializer
-    permission_classes = [IsAdministrator]
+    permission_classes: ClassVar = [IsAdministrator]
 
 
 class PasswordResetRequestView(APIView):
-    permission_classes = [AllowAny]
+    permission_classes: ClassVar = [AllowAny]
 
     def post(self, request):
         serializer = PasswordResetRequestSerializer(data=request.data)
@@ -84,7 +86,7 @@ class PasswordResetRequestView(APIView):
 
 
 class PasswordResetConfirmView(APIView):
-    permission_classes = [AllowAny]
+    permission_classes: ClassVar = [AllowAny]
 
     def post(self, request):
         serializer = PasswordResetConfirmSerializer(data=request.data)
@@ -130,7 +132,7 @@ class ProfileView(generics.RetrieveUpdateAPIView):
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
-    permission_classes = [IsAdministrator]
+    permission_classes: ClassVar = [IsAdministrator]
 
     def get_serializer_class(self):
         if self.action == "create":

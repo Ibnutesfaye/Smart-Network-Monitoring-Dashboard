@@ -1,3 +1,5 @@
+from typing import ClassVar
+
 from django.db import transaction
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
@@ -15,8 +17,9 @@ from .serializers import TopologyLinkSerializer
 
 class TopologyLinkViewSet(viewsets.ModelViewSet):
     serializer_class = TopologyLinkSerializer
-    permission_classes = [IsAdministratorOrScopedReadOnly]
-    filterset_fields = ["site", "status", "link_type", "discovery_source"]
+    permission_classes: ClassVar = [IsAdministratorOrScopedReadOnly]
+    filterset_fields: ClassVar = ["site", "status", "link_type", "discovery_source"]
+
 
     def get_queryset(self):
         return site_scope(TopologyLink.objects.select_related("site", "source_device", "target_device", "source_interface", "target_interface"), self.request.user)
@@ -37,7 +40,7 @@ class TopologyLinkViewSet(viewsets.ModelViewSet):
 
 
 class TopologyView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes: ClassVar = [IsAuthenticated]
 
     def get(self, request):
         devices = site_scope(Device.objects.select_related("site").prefetch_related("alerts"), request.user)

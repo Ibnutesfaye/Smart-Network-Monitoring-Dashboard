@@ -1,4 +1,5 @@
 from datetime import timedelta
+from typing import ClassVar
 
 from django.db.models import Count
 from django.db.models.functions import TruncDate
@@ -16,7 +17,7 @@ from .risk import calculate_health_score, calculate_risk_score
 
 
 class DeviceGrowthView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes: ClassVar = [IsAuthenticated]
 
     def get(self, request):
         since = timezone.now() - timedelta(days=30)
@@ -31,7 +32,7 @@ class DeviceGrowthView(APIView):
 
 
 class TrafficTrendsView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes: ClassVar = [IsAuthenticated]
 
     def get(self, request):
         since = timezone.now() - timedelta(days=7)
@@ -53,7 +54,7 @@ class TrafficTrendsView(APIView):
 
 
 class AlertTrendsView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes: ClassVar = [IsAuthenticated]
 
     def get(self, request):
         since = timezone.now() - timedelta(days=30)
@@ -73,7 +74,7 @@ class AlertTrendsView(APIView):
 
 
 class SecurityStatsView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes: ClassVar = [IsAuthenticated]
 
     def get(self, request):
         since = timezone.now() - timedelta(days=7)
@@ -93,7 +94,7 @@ class SecurityStatsView(APIView):
 
 
 class DashboardMetricsView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes: ClassVar = [IsAuthenticated]
 
     def get(self, request):
         total = Device.objects.count()

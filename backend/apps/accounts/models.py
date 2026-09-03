@@ -16,7 +16,7 @@ class User(AbstractUser):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ("-created_at",)
+        ordering = ["-created_at"]
 
     @property
     def is_administrator(self):

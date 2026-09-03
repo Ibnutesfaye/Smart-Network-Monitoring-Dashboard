@@ -1,3 +1,5 @@
+from typing import ClassVar
+
 from django.db import transaction
 from django.utils import timezone
 from rest_framework import viewsets
@@ -17,11 +19,11 @@ from .serializers import AlertRuleSerializer, AlertSerializer
 class AlertViewSet(viewsets.ModelViewSet):
     queryset = Alert.objects.select_related("device", "interface").all()
     serializer_class = AlertSerializer
-    permission_classes = [IsAdministratorOrReadOnly]
-    filterset_fields = ["alert_level", "alert_type", "state", "acknowledged", "device", "interface"]
-    search_fields = ["message"]
-    ordering_fields = ["created_at", "alert_level", "first_triggered_at", "last_triggered_at", "occurrence_count"]
-    ordering = ["-created_at"]
+    permission_classes: ClassVar = [IsAdministratorOrReadOnly]
+    filterset_fields: ClassVar = ["alert_level", "alert_type", "state", "acknowledged", "device", "interface"]
+    search_fields: ClassVar = ["message"]
+    ordering_fields: ClassVar = ["created_at", "alert_level", "first_triggered_at", "last_triggered_at", "occurrence_count"]
+    ordering: ClassVar = ["-created_at"]
 
     def get_queryset(self):
         return site_scope(super().get_queryset(), self.request.user, "device__site_id")
@@ -43,4 +45,4 @@ class AlertViewSet(viewsets.ModelViewSet):
 class AlertRuleViewSet(viewsets.ModelViewSet):
     queryset = AlertRule.objects.all()
     serializer_class = AlertRuleSerializer
-    permission_classes = [IsAdministrator]
+    permission_classes: ClassVar = [IsAdministrator]

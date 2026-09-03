@@ -1,3 +1,5 @@
+from typing import ClassVar
+
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -20,17 +22,17 @@ from .serializers import (
 class OrganizationViewSet(viewsets.ModelViewSet):
     queryset = Organization.objects.all()
     serializer_class = OrganizationSerializer
-    permission_classes = [IsAdministratorOrReadOnly]
-    filterset_fields = ["active"]
-    search_fields = ["name", "code"]
+    permission_classes: ClassVar = [IsAdministratorOrReadOnly]
+    filterset_fields: ClassVar = ["active"]
+    search_fields: ClassVar = ["name", "code"]
 
 
 class SiteViewSet(viewsets.ModelViewSet):
     queryset = Site.objects.select_related("organization")
     serializer_class = SiteSerializer
-    permission_classes = [IsAdministratorOrReadOnly]
-    filterset_fields = ["organization", "active"]
-    search_fields = ["name", "code"]
+    permission_classes: ClassVar = [IsAdministratorOrReadOnly]
+    filterset_fields: ClassVar = ["organization", "active"]
+    search_fields: ClassVar = ["name", "code"]
 
     def get_queryset(self):
         return site_scope(super().get_queryset(), self.request.user, "id")
@@ -39,8 +41,8 @@ class SiteViewSet(viewsets.ModelViewSet):
 class NetworkSegmentViewSet(viewsets.ModelViewSet):
     queryset = NetworkSegment.objects.select_related("site", "site__organization")
     serializer_class = NetworkSegmentSerializer
-    permission_classes = [IsAdministratorOrReadOnly]
-    filterset_fields = ["site", "active", "monitoring_enabled", "discovery_enabled"]
+    permission_classes: ClassVar = [IsAdministratorOrReadOnly]
+    filterset_fields: ClassVar = ["site", "active", "monitoring_enabled", "discovery_enabled"]
 
     def get_queryset(self):
         return site_scope(super().get_queryset(), self.request.user)
@@ -49,8 +51,8 @@ class NetworkSegmentViewSet(viewsets.ModelViewSet):
 class DeviceInterfaceViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = DeviceInterface.objects.select_related("device", "device__site")
     serializer_class = DeviceInterfaceSerializer
-    filterset_fields = ["device", "oper_status", "admin_status"]
-    search_fields = ["name", "alias", "description", "mac_address"]
+    filterset_fields: ClassVar = ["device", "oper_status", "admin_status"]
+    search_fields: ClassVar = ["name", "alias", "description", "mac_address"]
 
     def get_queryset(self):
         return site_scope(super().get_queryset(), self.request.user, "device__site_id")
@@ -59,11 +61,11 @@ class DeviceInterfaceViewSet(viewsets.ReadOnlyModelViewSet):
 class DeviceViewSet(viewsets.ModelViewSet):
     queryset = Device.objects.select_related("site", "network_segment")
     serializer_class = DeviceSerializer
-    permission_classes = [IsAdministratorOrReadOnly]
-    filterset_fields = ["site", "network_segment", "status", "device_type", "criticality", "vendor", "is_known", "monitoring_enabled"]
-    search_fields = ["device_name", "hostname", "ip_address", "mac_address", "vendor"]
-    ordering_fields = ["device_name", "ip_address", "last_seen", "status", "created_at"]
-    ordering = ["-last_seen"]
+    permission_classes: ClassVar = [IsAdministratorOrReadOnly]
+    filterset_fields: ClassVar = ["site", "network_segment", "status", "device_type", "criticality", "vendor", "is_known", "monitoring_enabled"]
+    search_fields: ClassVar = ["device_name", "hostname", "ip_address", "mac_address", "vendor"]
+    ordering_fields: ClassVar = ["device_name", "ip_address", "last_seen", "status", "created_at"]
+    ordering: ClassVar = ["-last_seen"]
 
     def get_queryset(self):
         return site_scope(super().get_queryset(), self.request.user)

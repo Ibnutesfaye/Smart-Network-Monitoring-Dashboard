@@ -1,4 +1,5 @@
 import os
+from typing import ClassVar
 
 from django.conf import settings
 from django.http import FileResponse
@@ -16,10 +17,10 @@ from .tasks import generate_report_task
 class ReportViewSet(viewsets.ModelViewSet):
     queryset = Report.objects.select_related("generated_by").all()
     serializer_class = ReportSerializer
-    permission_classes = [IsAdministratorOrReadOnly]
-    http_method_names = ["get", "post", "head", "options"]
-    filterset_fields = ["report_type", "export_format"]
-    ordering = ["-created_at"]
+    permission_classes: ClassVar = [IsAdministratorOrReadOnly]
+    http_method_names: ClassVar = ["get", "post", "head", "options"]
+    filterset_fields: ClassVar = ["report_type", "export_format"]
+    ordering: ClassVar = ["-created_at"]
 
     @action(detail=False, methods=["post"], permission_classes=[IsAdministrator])
     def generate(self, request):
