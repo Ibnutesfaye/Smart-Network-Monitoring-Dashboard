@@ -39,7 +39,8 @@ services:
     ports:
       - "8000:8000"
     env_file:
-      - .env
+      - path: .env
+        required: false
     environment:
       DB_HOST: db
       REDIS_URL: redis://redis:6379/0
@@ -58,7 +59,8 @@ services:
     volumes:
       - ./backend:/app
     env_file:
-      - .env
+      - path: .env
+        required: false
     environment:
       DB_HOST: db
       REDIS_URL: redis://redis:6379/0
@@ -76,7 +78,8 @@ services:
     volumes:
       - ./backend:/app
     env_file:
-      - .env
+      - path: .env
+        required: false
     environment:
       DB_HOST: db
       REDIS_URL: redis://redis:6379/0

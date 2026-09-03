@@ -2,7 +2,9 @@ services:
   db:
     image: postgres:16-alpine
     restart: unless-stopped
-    env_file: [.env]
+    env_file:
+      - path: .env
+        required: false
     environment:
       POSTGRES_DB: ${DB_NAME:?DB_NAME is required}
       POSTGRES_USER: ${DB_USER:?DB_USER is required}
@@ -33,7 +35,9 @@ services:
     build: ./backend
     restart: unless-stopped
     command: sh -c "python manage.py migrate --noinput && daphne -b 0.0.0.0 -p 8000 config.asgi:application"
-    env_file: [.env]
+    env_file:
+      - path: .env
+        required: false
     environment:
       DJANGO_SETTINGS_MODULE: config.settings.prod
       DEBUG: "False"
@@ -59,7 +63,9 @@ services:
     build: ./backend
     restart: unless-stopped
     command: celery -A config worker -l info
-    env_file: [.env]
+    env_file:
+      - path: .env
+        required: false
     environment:
       DJANGO_SETTINGS_MODULE: config.settings.prod
       DEBUG: "False"
@@ -74,7 +80,9 @@ services:
     build: ./backend
     restart: unless-stopped
     command: celery -A config beat -l info --schedule=/var/run/celery/celerybeat-schedule
-    env_file: [.env]
+    env_file:
+      - path: .env
+        required: false
     environment:
       DJANGO_SETTINGS_MODULE: config.settings.prod
       DEBUG: "False"
