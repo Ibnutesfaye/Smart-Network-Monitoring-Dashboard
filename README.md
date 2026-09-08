@@ -67,19 +67,19 @@ Celery Beat schedules monitoring work. Workers persist results in PostgreSQL and
 
 ## Technology stack
 
-| Layer | Technologies |
-| --- | --- |
-| Frontend | React 19, TypeScript, Vite 8, React Router, TanStack Query, Axios |
-| Visualization | Recharts, react-force-graph-2d, Lucide |
-| Backend | Python 3.12+, Django 5, Django REST Framework |
-| Authentication | Simple JWT with rotating, blacklisted refresh tokens |
-| Real time | Django Channels, Daphne, Redis |
-| Jobs | Celery and Celery Beat |
-| Persistence | PostgreSQL 16; optional SQLite local mode |
-| Reports | ReportLab and OpenPyXL |
-| API docs | drf-spectacular, OpenAPI, Swagger UI |
-| Testing | pytest, pytest-django, Vitest, Testing Library |
-| Deployment | Docker Compose, Nginx, Gunicorn/Daphne |
+| Layer          | Technologies                                                      |
+| -------------- | ----------------------------------------------------------------- |
+| Frontend       | React 19, TypeScript, Vite 8, React Router, TanStack Query, Axios |
+| Visualization  | Recharts, react-force-graph-2d, Lucide                            |
+| Backend        | Python 3.12+, Django 5, Django REST Framework                     |
+| Authentication | Simple JWT with rotating, blacklisted refresh tokens              |
+| Real time      | Django Channels, Daphne, Redis                                    |
+| Jobs           | Celery and Celery Beat                                            |
+| Persistence    | PostgreSQL 16; optional SQLite local mode                         |
+| Reports        | ReportLab and OpenPyXL                                            |
+| API docs       | drf-spectacular, OpenAPI, Swagger UI                              |
+| Testing        | pytest, pytest-django, Vitest, Testing Library                    |
+| Deployment     | Docker Compose, Nginx, Gunicorn/Daphne                            |
 
 ## Project structure
 
@@ -121,13 +121,13 @@ SNMADMDCP/
 
 Choose Docker or a local toolchain.
 
-| Tool | Version | Required for |
-| --- | --- | --- |
-| Docker and Docker Compose | Current / Compose v2 | Container setup |
-| Python | 3.12+ | Local backend |
-| Node.js | 18+; 22 recommended | Local frontend |
-| PostgreSQL | 16 recommended | Standard database |
-| Redis | 7 recommended | Channels and Celery |
+| Tool                      | Version              | Required for        |
+| ------------------------- | -------------------- | ------------------- |
+| Docker and Docker Compose | Current / Compose v2 | Container setup     |
+| Python                    | 3.12+                | Local backend       |
+| Node.js                   | 18+; 22 recommended  | Local frontend      |
+| PostgreSQL                | 16 recommended       | Standard database   |
+| Redis                     | 7 recommended        | Channels and Celery |
 
 ## Quick start with Docker
 
@@ -140,13 +140,13 @@ docker compose up --build
 
 Review `.env` first. Compose overrides `DB_HOST`, `REDIS_URL`, and `MONITORING_MODE` with container-safe values. Change the example database password in both `.env` and `docker-compose.yml` if the environment is accessible to others.
 
-| Service | URL |
-| --- | --- |
-| Application | http://localhost:5173 |
-| REST API | http://localhost:8000/api/v1/ |
-| Swagger UI | http://localhost:8000/api/schema/swagger/ |
-| OpenAPI schema | http://localhost:8000/api/schema/ |
-| Django admin | http://localhost:8000/admin/ |
+| Service        | URL                                       |
+| -------------- | ----------------------------------------- |
+| Application    | http://localhost:5173                     |
+| REST API       | http://localhost:8000/api/v1/             |
+| Swagger UI     | http://localhost:8000/api/schema/swagger/ |
+| OpenAPI schema | http://localhost:8000/api/schema/         |
+| Django admin   | http://localhost:8000/admin/              |
 
 The backend applies migrations and seeds demo data when it starts. Stop with `Ctrl+C`, then remove the containers with:
 
@@ -259,10 +259,10 @@ Use PostgreSQL and Redis to exercise background scheduling and cross-process rea
 
 `python manage.py seed_demo` creates sample devices, traffic, device status history, alerts, an alert rule, an audit record, and these users:
 
-| Username | Password | Role |
-| --- | --- | --- |
-| `admin` | `admin123` | Administrator / Django superuser |
-| `analyst` | `analyst123` | Network analyst |
+| Username  | Password     | Role                             |
+| --------- | ------------ | -------------------------------- |
+| `admin`   | `admin123`   | Administrator / Django superuser |
+| `analyst` | `analyst123` | Network analyst                  |
 
 The command uses idempotent lookups and can be rerun. Passwords are assigned only when each user is first created. These credentials are strictly for local demonstrations; change or remove them before deployment.
 
@@ -270,26 +270,26 @@ The command uses idempotent lookups and can be rerun. Passwords are assigned onl
 
 ### Backend variables
 
-| Variable | Default | Purpose |
-| --- | --- | --- |
-| `DJANGO_SETTINGS_MODULE` | `config.settings.dev` | Selects `dev`, `local`, `test`, or `prod` |
-| `SECRET_KEY` | Insecure development fallback | Django signing secret; set a unique production value |
-| `DEBUG` | `True` | Debugging and development media serving |
-| `ALLOWED_HOSTS` | `localhost,127.0.0.1` | Comma-separated host allowlist |
-| `CORS_ORIGINS` | `http://localhost:5173` | Comma-separated frontend origins |
-| `DB_NAME` | `snmadmdcp` | PostgreSQL database |
-| `DB_USER` | `postgres` | PostgreSQL user |
-| `DB_PASSWORD` | `postgres` | PostgreSQL password |
-| `DB_HOST` | `localhost` | PostgreSQL host; `db` in Compose |
-| `DB_PORT` | `5432` | PostgreSQL port |
-| `REDIS_URL` | `redis://localhost:6379/0` | Channels, broker, and result store |
-| `JWT_ACCESS_MINUTES` | `15` | Access-token lifetime |
-| `JWT_REFRESH_DAYS` | `7` | Refresh-token lifetime |
-| `MONITORING_MODE` | `mock` | `mock` or `real` collector |
-| `SUBNET_CIDR` | `192.168.1.0/24` | Authorized discovery range |
-| `EMAIL_*` | Varies | Optional SMTP connection and sender settings |
-| `TELEGRAM_BOT_TOKEN` | Empty | Reserved Telegram integration token |
-| `THREAT_INTEL_API_KEY` | Empty | Reserved threat-intelligence key |
+| Variable                 | Default                       | Purpose                                              |
+| ------------------------ | ----------------------------- | ---------------------------------------------------- |
+| `DJANGO_SETTINGS_MODULE` | `config.settings.dev`         | Selects `dev`, `local`, `test`, or `prod`            |
+| `SECRET_KEY`             | Insecure development fallback | Django signing secret; set a unique production value |
+| `DEBUG`                  | `True`                        | Debugging and development media serving              |
+| `ALLOWED_HOSTS`          | `localhost,127.0.0.1`         | Comma-separated host allowlist                       |
+| `CORS_ORIGINS`           | `http://localhost:5173`       | Comma-separated frontend origins                     |
+| `DB_NAME`                | `snmadmdcp`                   | PostgreSQL database                                  |
+| `DB_USER`                | `postgres`                    | PostgreSQL user                                      |
+| `DB_PASSWORD`            | `postgres`                    | PostgreSQL password                                  |
+| `DB_HOST`                | `localhost`                   | PostgreSQL host; `db` in Compose                     |
+| `DB_PORT`                | `5432`                        | PostgreSQL port                                      |
+| `REDIS_URL`              | `redis://localhost:6379/0`    | Channels, broker, and result store                   |
+| `JWT_ACCESS_MINUTES`     | `15`                          | Access-token lifetime                                |
+| `JWT_REFRESH_DAYS`       | `7`                           | Refresh-token lifetime                               |
+| `MONITORING_MODE`        | `mock`                        | `mock` or `real` collector                           |
+| `SUBNET_CIDR`            | `192.168.1.0/24`              | Authorized discovery range                           |
+| `EMAIL_*`                | Varies                        | Optional SMTP connection and sender settings         |
+| `TELEGRAM_BOT_TOKEN`     | Empty                         | Reserved Telegram integration token                  |
+| `THREAT_INTEL_API_KEY`   | Empty                         | Reserved threat-intelligence key                     |
 
 ### Frontend variables
 
@@ -306,20 +306,20 @@ When served through Nginx on the same origin, the API client can use its default
 
 Protected requests use `Authorization: Bearer <access-token>`.
 
-| Area | Endpoints |
-| --- | --- |
-| Authentication | `POST /api/v1/auth/login/`, `refresh/`, `logout/`, `password-reset/` |
-| Profile | `GET/PATCH /api/v1/auth/profile/` |
-| Registration | `POST /api/v1/auth/register/` (administrator) |
-| Users | `/api/v1/users/` and `/api/v1/users/{id}/` |
-| Devices | `/api/v1/devices/`, `/{id}/history/`, `/discover/` |
-| Traffic | `/api/v1/traffic/`, `/summary/` |
-| Alerts | `/api/v1/alerts/`, `/{id}/acknowledge/` |
-| Reports | `/api/v1/reports/`, `/generate/`, `/{id}/download/` |
-| Analytics | `/api/v1/analytics/device-growth/`, `traffic-trends/`, `alert-trends/`, `security-stats/` |
-| Dashboard | `/api/v1/dashboard/metrics/` |
-| Topology | `/api/v1/topology/` |
-| Audit | `/api/v1/activity-logs/` (administrator) |
+| Area           | Endpoints                                                                                 |
+| -------------- | ----------------------------------------------------------------------------------------- |
+| Authentication | `POST /api/v1/auth/login/`, `refresh/`, `logout/`, `password-reset/`                      |
+| Profile        | `GET/PATCH /api/v1/auth/profile/`                                                         |
+| Registration   | `POST /api/v1/auth/register/` (administrator)                                             |
+| Users          | `/api/v1/users/` and `/api/v1/users/{id}/`                                                |
+| Devices        | `/api/v1/devices/`, `/{id}/history/`, `/discover/`                                        |
+| Traffic        | `/api/v1/traffic/`, `/summary/`                                                           |
+| Alerts         | `/api/v1/alerts/`, `/{id}/acknowledge/`                                                   |
+| Reports        | `/api/v1/reports/`, `/generate/`, `/{id}/download/`                                       |
+| Analytics      | `/api/v1/analytics/device-growth/`, `traffic-trends/`, `alert-trends/`, `security-stats/` |
+| Dashboard      | `/api/v1/dashboard/metrics/`                                                              |
+| Topology       | `/api/v1/topology/`                                                                       |
+| Audit          | `/api/v1/activity-logs/` (administrator)                                                  |
 
 List endpoints use page-number pagination and commonly support `search`, resource filters such as `status` or `alert_level`, and `ordering`. Swagger is the authoritative schema for the running version.
 
@@ -335,13 +335,13 @@ Use `wss://` behind HTTPS. Because query strings may appear in logs, redact them
 
 ## Monitoring jobs
 
-| Job | Schedule | Responsibility |
-| --- | --- | --- |
-| `discover_devices` | Every 5 minutes | Discovers devices |
-| `check_device_status` | Every minute | Updates availability and latency |
-| `sample_traffic` | Every 30 seconds | Records traffic measurements |
-| `evaluate_alert_rules` | Every minute | Creates matching alerts |
-| `cleanup_old_traffic` | Daily at 02:00 UTC | Removes expired samples |
+| Job                    | Schedule           | Responsibility                   |
+| ---------------------- | ------------------ | -------------------------------- |
+| `discover_devices`     | Every 5 minutes    | Discovers devices                |
+| `check_device_status`  | Every minute       | Updates availability and latency |
+| `sample_traffic`       | Every 30 seconds   | Records traffic measurements     |
+| `evaluate_alert_rules` | Every minute       | Creates matching alerts          |
+| `cleanup_old_traffic`  | Daily at 02:00 UTC | Removes expired samples          |
 
 `mock` mode generates demonstration data. `real` mode uses network-aware collection and can require ICMP/raw-socket privileges. Linux containers may need a narrowly scoped `NET_RAW` capability. Windows users will generally have a smoother setup through an authorized WSL2 or lab environment.
 
@@ -411,7 +411,7 @@ Before exposure:
 - Preserve Nginx `Upgrade` and `Connection` headers.
 - Use `wss://` when the page uses HTTPS.
 
-### Celery jobs do not run
+### Celery jobs do not ru
 
 - Run both Worker and Beat with the same Redis URL and Django settings.
 - Inspect `docker compose logs celery_worker celery_beat`.
@@ -430,21 +430,21 @@ Or call `.\venv\Scripts\python.exe` directly.
 
 ## Documentation
 
-| Document | Purpose |
-| --- | --- |
-| [Software requirements](docs/SRS.md) | Scope and requirements |
-| [Architecture](docs/architecture.md) | Components and data flow |
-| [API documentation](docs/api-docs.md) | REST and WebSocket summary |
-| [Database schema](docs/database-schema.md) | Tables and relationships |
-| [ER diagram](docs/er-diagram.md) | Entity relationships |
-| [Class diagram](docs/class-diagram.md) | Application model view |
-| [Use cases](docs/use-cases.md) | User/system interactions |
-| [Developer guide](docs/developer-guide.md) | Implementation guidance |
-| [Deployment guide](docs/deployment-guide.md) | Deployment checklist |
-| [User manual](docs/user-manual.md) | End-user workflows |
-| [PostgreSQL setup](docs/postgresql-setup.md) | Database setup |
+| Document                                     | Purpose                                                             |
+| -------------------------------------------- | ------------------------------------------------------------------- |
+| [Software requirements](docs/SRS.md)         | Scope and requirements                                              |
+| [Architecture](docs/architecture.md)         | Components and data flow                                            |
+| [API documentation](docs/api-docs.md)        | REST and WebSocket summary                                          |
+| [Database schema](docs/database-schema.md)   | Tables and relationships                                            |
+| [ER diagram](docs/er-diagram.md)             | Entity relationships                                                |
+| [Class diagram](docs/class-diagram.md)       | Application model view                                              |
+| [Use cases](docs/use-cases.md)               | User/system interactions                                            |
+| [Developer guide](docs/developer-guide.md)   | Implementation guidance                                             |
+| [Deployment guide](docs/deployment-guide.md) | Deployment checklist                                                |
+| [User manual](docs/user-manual.md)           | End-user workflows                                                  |
+| [PostgreSQL setup](docs/postgresql-setup.md) | Database setup                                                      |
 | [Monitoring guide](docs/monitoring-guide.md) | Authorized targets, collectors, telemetry, availability, and alerts |
-| [SNMP guide](docs/snmp-guide.md) | SNMPv2c/v3 configuration, OIDs, secret boundary, and support status |
+| [SNMP guide](docs/snmp-guide.md)             | SNMPv2c/v3 configuration, OIDs, secret boundary, and support status |
 
 ## Security and license
 
