@@ -417,7 +417,7 @@ Before exposure:
 - Inspect `docker compose logs celery_worker celery_beat`.
 - The SQLite settings make invoked tasks eager but do not create recurring schedules without Beat.
 
-### PowerShell blocks activation
+### PowerShel blocks activation
 
 With an administrator-approved policy, use:
 
