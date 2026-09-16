@@ -411,7 +411,7 @@ Before exposure:
 - Preserve Nginx `Upgrade` and `Connection` headers.
 - Use `wss://` when the page uses HTTPS.
 
-### Celery jobs do not ru
+### Celery jobs do not run
 
 - Run both Worker and Beat with the same Redis URL and Django settings.
 - Inspect `docker compose logs celery_worker celery_beat`.
