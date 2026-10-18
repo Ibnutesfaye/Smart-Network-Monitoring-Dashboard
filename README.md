@@ -408,7 +408,7 @@ Before exposure:
 
 - Use Daphne/ASGI and verify Redis at `REDIS_URL`.
 - Include a current access token in `?token=`.
-- Preserve Nginx `Upgrade` and `Connection` headers.
+- Preserve Nginx `Upgrade` and `Connection` header.
 - Use `wss://` when the page uses HTTPS.
 
 ### Celery jobs do not run
