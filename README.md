@@ -413,7 +413,7 @@ Before exposure:
 
 ### Celery jobs do not run
 
-- Run both Worker and Beat with the same Redis URL and Djan settings.
+- Run both Worker and Beat with the same Redis URL and Django settings.
 - Inspect `docker compose logs celery_worker celery_beat`.
 - The SQLite settings make invoked tasks eager but do not create recurring schedules without Beat.
 
