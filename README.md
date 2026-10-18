@@ -408,12 +408,12 @@ Before exposure:
 
 - Use Daphne/ASGI and verify Redis at `REDIS_URL`.
 - Include a current access token in `?token=`.
-- Preserve Nginx `Upgrade` and `Connection` header.
+- Preserve Nginx `Upgrade` and `Connection` headers.
 - Use `wss://` when the page uses HTTPS.
 
 ### Celery jobs do not run
 
-- Run both Worker and Beat with the same Redis URL and Django settings.
+- Run both Worker and Beat with the same Redis URL and Djan settings.
 - Inspect `docker compose logs celery_worker celery_beat`.
 - The SQLite settings make invoked tasks eager but do not create recurring schedules without Beat.
 
